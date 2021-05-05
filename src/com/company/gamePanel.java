@@ -1,17 +1,14 @@
 package com.company;
 
 import javax.swing.*;
-import javax.xml.crypto.dsig.keyinfo.KeyValue;
 import java.awt.*;
 import java.awt.event.*;
-import java.security.Key;
-import java.util.Arrays;
 import java.util.Random;
 
 public class gamePanel extends JPanel implements ActionListener {
     private int sectionSize = 25, snakeLength = 6;
-    private int[] appleCoords = new int[2];
-    private int[][] snakeCoords = new int[(600/sectionSize)*(600/sectionSize)][2];
+    private final int[] appleCoords = new int[2];
+    private final int[][] snakeCoords = new int[(600/sectionSize)*(600/sectionSize)][2];
     private char direction = 'e';
     boolean running = false;
     Timer timer;
@@ -51,27 +48,18 @@ public class gamePanel extends JPanel implements ActionListener {
             if (snakeCoords[i][0] < 600)g.fillRect(snakeCoords[i][0], snakeCoords[i][1], sectionSize, sectionSize);
         }
         g.setFont(new Font("Arial", Font.BOLD , 16));
-        g.drawString(("Score: " + (snakeLength - 6)).toString(), 665, 16);
+        g.drawString(("Score: " + (snakeLength - 6)), 665, 16);
     }
 
     public void move()
     {
 
         if (!running) return;
-        switch(direction)
-        {
-            case 's':
-                snakeCoords[snakeLength-1][1] += sectionSize;
-                break;
-            case 'e':
-                snakeCoords[snakeLength-1][0] += sectionSize;
-                break;
-            case 'w':
-                snakeCoords[snakeLength-1][0] -= sectionSize;
-                break;
-            case 'n':
-                snakeCoords[snakeLength-1][1] -= sectionSize;
-                break;
+        switch (direction) {
+            case 's' -> snakeCoords[snakeLength - 1][1] += sectionSize;
+            case 'e' -> snakeCoords[snakeLength - 1][0] += sectionSize;
+            case 'w' -> snakeCoords[snakeLength - 1][0] -= sectionSize;
+            case 'n' -> snakeCoords[snakeLength - 1][1] -= sectionSize;
         }
         for(int i = 0; i < snakeLength-1; i++)
         {
